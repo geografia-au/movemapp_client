@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="movemapp_client",
-    version="0.1.0",
+    version="0.1.1",
     packages=find_packages(),
     install_requires=[
          "carto",
@@ -23,17 +23,7 @@ setup(
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Intended Audience :: Developers",
-        "License :: OSI Approved :: MIT License",
-        "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.6",
-        "Programming Language :: Python :: 3.7",
-        "Programming Language :: Python :: 3.8",
-        "Programming Language :: Python :: 3.9",
-        "Programming Language :: Python :: 3.10",
-        "Programming Language :: Python :: 3.11",
-        "Programming Language :: Python :: 3.12",
-        "Programming Language :: Python :: 3.13",
-        "Programming Language :: Python :: 3.14",
-        "Programming Language :: Python :: 3.15",
+        "Operating System :: OS Independent",
+        "License :: OSI Approved :: MIT License"
     ],
 )

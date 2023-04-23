@@ -14,10 +14,9 @@ git+https://github.com/geografia-au/movemapp_client.git@main
 Or manually:
 
 ```sh
-git clone git@github.com:geografia-au/movemapp_client.git
-cd movemapp_client
-pip install .
+pip install git+https://github.com/geografia-au/movemapp_client.git@main
 ```
+
 
 # Usage
 
@@ -85,6 +84,7 @@ client.delete("api_key")
 ## Install
 
 ```sh
+git clone git@github.com:geografia-au/movemapp_client.git
 cd movemapp_client
 pip install .
 ```
@@ -108,6 +108,8 @@ python -m unittest movemapp_client.tests.test_client
 ## Publish
 
 ```sh
+pip install wheel
+pip install twine
 python setup.py sdist bdist_wheel
 twine upload dist/*
 ```
