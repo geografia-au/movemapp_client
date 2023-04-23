@@ -48,12 +48,28 @@ class MovemappClient:
         if resource == "datasets":
             return self.get_datasets()
         elif resource == "api_key":
-            return self.get_api_key()
+            return self.get_api_key_as_dict()
         else:
             return []
 
+    def get_api_key_as_dict(self):
+        api_key = self.get_api_key()
+        return {
+            "token": api_key.token,
+            "name": api_key.name
+        }
+
     def create(self, resource):
-        return []
+        if resource == "api_key":
+            return self.create_api_key()
+        else:
+            return []
+
+    def delete(self, resource):
+        if resource == "api_key":
+            return self.delete_api_key()
+        else:
+            return []
 
     def get_api_key(self):
         # get the list of api keys
@@ -67,20 +83,9 @@ class MovemappClient:
         )
         # if the api key is not found, create it
         if api_key is None:
-            grants = [
-                {
-                    "schema": self.schema,
-                    "name": table,
-                    "permissions": ["select"]
-                } for table in self.get_datasets()
-            ]
+            api_key = self.create("api_key")
 
-            api_key = self.geodb_api_key_manager.create(
-                name=self.api_key_name,
-                apis=['sql', 'maps'],
-                tables=grants
-            )
-        return {"token": api_key.token, "name": api_key.name}
+        return api_key
 
     def get_datasets(self):
         self.datasets = self.geodb_dataset_manager.filter(
@@ -90,5 +95,23 @@ class MovemappClient:
         # get the list of table_names
         return [dataset.name for dataset in self.datasets]
 
-    def say_hello(self):
-        return "Hello from MovemappClient!"
+    def create_api_key(self):
+        grants = [
+            {
+                "schema": self.schema,
+                "name": table,
+                "permissions": ["select"]
+            } for table in self.get_datasets()
+        ]
+
+        api_key = self.geodb_api_key_manager.create(
+            name=self.api_key_name,
+            apis=['sql', 'maps'],
+            tables=grants
+        )
+
+        return api_key
+
+    def delete_api_key(self):
+        api_key = self.get_api_key()
+        api_key.delete()
