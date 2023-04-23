@@ -78,8 +78,6 @@ print(api_key)
 
 ```py
 client.delete("api_key")
-# assert that the api key is deleted
-api_key = client.get("api_key")
 ```
 
 # Development
