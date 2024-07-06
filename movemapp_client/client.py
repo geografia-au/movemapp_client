@@ -1,6 +1,5 @@
 # This is the client.py module for movemapp_client package
 
-import carto
 from carto.auth import APIKeyAuthClient
 from carto.api_keys import APIKeyManager
 from carto.datasets import DatasetManager
